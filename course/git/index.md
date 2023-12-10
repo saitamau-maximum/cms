@@ -2,6 +2,7 @@
 title: Git入門
 description: Gitの基本的な使い方を学び、共同開発で役立つような力を身につけましょう。
 publishedAt: 2023-12-10
+thumbnail: /public/course/git/thumbnail.png
 ---
 
 プログラミングに置いて、**Git**は非常に重要なツールです。
