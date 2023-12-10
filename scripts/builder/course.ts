@@ -119,9 +119,9 @@ const outputCourseListIndexJson = async (
   courseList: CourseData[],
   outputDir: string
 ) => {
-  // 転送量を抑えるため、各コースのセクションはセクション数だけの配列に変換する
   const courseEntryList = courseList.map((course) => ({
     ...course,
+    content: undefined,
     sections: undefined,
     sectionsCount: course.sections.length,
   }));
