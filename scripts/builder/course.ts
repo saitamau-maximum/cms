@@ -152,7 +152,8 @@ const outputCourseDetail = async (course: CourseData, outputDir: string) => {
   await writeFile(courseJsonPath, courseJson);
 
   const sectionEmitters = course.sections.map((section) => async () => {
-    const sectionContentPath = join(courseDir, `${section.slug}.json`);
+    await mkdir(join(courseDir, section.slug));
+    const sectionContentPath = join(courseDir, section.slug, "index.json");
     const sectionContent = JSON.stringify(section, null, 2);
     await writeFile(sectionContentPath, sectionContent);
   });
