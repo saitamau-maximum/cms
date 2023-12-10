@@ -38,8 +38,10 @@ export const validateAndParseMarkdown = <T extends z.ZodObject<any>>(
     throw Errors.FrontMatter.NotFound(path);
   }
 
-  const data = load(frontMatter);
-  if (!data) {
+  let data: unknown;
+  try {
+    data = load(frontMatter);
+  } catch (e) {
     throw Errors.FrontMatter.NotValidYaml(path);
   }
 
