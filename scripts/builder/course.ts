@@ -5,6 +5,7 @@ import {
   getDirectoryName,
   getFileName,
   getFiles,
+  getFilesDeep,
 } from "../utils/find";
 import { join } from "path";
 import { mkdir, readFile, writeFile } from "fs/promises";
@@ -175,4 +176,32 @@ export const buildCourse = async (inputDir: string, outputDir: string) => {
   });
 
   await Promise.all(courseEmitters.map((e) => e()));
+};
+
+export const validateCourse = async (inputDir: string) => {
+  const [courseIndexFiles, courseSectionFiles] = await Promise.all([
+    getFilesDeep(inputDir, (path) => path.endsWith("index.md")),
+    getFilesDeep(inputDir, (path) => !path.endsWith("index.md")),
+  ]);
+
+  const validateTasks: (() => Promise<void>)[] = [];
+
+  courseIndexFiles.forEach((courseIndexFile) => {
+    validateTasks.push(async () => {
+      const courseIndexContent = await readFile(courseIndexFile, "utf8");
+      validateAndParseCourseFrontMatter(courseIndexContent, courseIndexFile);
+    });
+  });
+
+  courseSectionFiles.forEach((courseSectionFile) => {
+    validateTasks.push(async () => {
+      const courseSectionContent = await readFile(courseSectionFile, "utf8");
+      validateAndParseSectionFrontMatter(
+        courseSectionContent,
+        courseSectionFile
+      );
+    });
+  });
+
+  await Promise.all(validateTasks.map((t) => t()));
 };

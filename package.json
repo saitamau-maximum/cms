@@ -1,7 +1,8 @@
 {
   "name": "cms",
   "scripts": {
-    "build": "rimraf dist && tsx ./scripts/build.ts"
+    "build": "rimraf dist && tsx ./scripts/build.ts",
+    "validate": "tsx ./scripts/validate.ts"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
