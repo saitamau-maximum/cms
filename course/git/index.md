@@ -1,4 +1,5 @@
 ---
+id: ee59e37d-d9ba-4865-ac92-ba98ff907a00
 title: Git入門
 description: Gitの基本的な使い方を学び、共同開発で役立つような力を身につけましょう。
 publishedAt: 2023-12-10

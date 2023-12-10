@@ -1,4 +1,5 @@
 ---
+id: fa46bdb9-d276-43a2-b12c-a15dbfb6813c
 title: HTML入門
 description: HTMLの基本的な書き方や役割などを学びます。
 publishedAt: 2023-12-10

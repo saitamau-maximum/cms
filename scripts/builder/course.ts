@@ -11,6 +11,7 @@ import { join } from "path";
 import { mkdir, readFile, writeFile } from "fs/promises";
 
 const courseFrontMatterSchema = z.object({
+  id: z.string(),
   title: z.string(),
   description: z.string(),
   publishedAt: z.date().optional(),
