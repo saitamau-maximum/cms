@@ -1,11 +1,16 @@
 {
   "name": "cms",
   "scripts": {
-    "build": "tsx ./scripts/build.ts"
+    "build": "rimraf dist && tsx ./scripts/build.ts"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.10.4",
-    "tsx": "^4.6.2"
+    "js-yaml": "^4.1.0",
+    "picocolors": "^1.0.0",
+    "rimraf": "^5.0.5",
+    "tsx": "^4.6.2",
+    "zod": "^3.22.4"
   }
 }
