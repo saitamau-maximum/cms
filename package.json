@@ -1,0 +1,11 @@
+{
+  "name": "cms",
+  "scripts": {
+    "build": "tsx ./scripts/build.ts"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.2",
+    "@types/node": "^20.10.4",
+    "tsx": "^4.6.2"
+  }
+}
