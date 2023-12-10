@@ -14,6 +14,9 @@ const courseFrontMatterSchema = z.object({
   title: z.string(),
   description: z.string(),
   publishedAt: z.date().optional(),
+  thumbnail: z
+    .string()
+    .refine((v) => /^https?:\/\/.+$/.test(v) || v.startsWith("/public")),
 });
 
 const validateAndParseCourseFrontMatter = (content: string, path: string) =>
