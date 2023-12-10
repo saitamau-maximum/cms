@@ -3,25 +3,25 @@ import { join } from "path";
 
 // 指定したディレクトリ内のファイルを再帰的に検索して、最初に`fileName`と一致するファイルのパスを返します。
 // 見つからない場合は`null`を返します。
-// `ext`を指定した場合は、拡張子が一致するファイルのみを対象とします。
+// `filter`を指定した場合は、`filter`で指定した条件に一致するファイルを対象とします。
 export const findFileDeep = async (
   dir: string,
   fileName: string,
-  ext?: string
+  filter?: (path: string) => boolean
 ): Promise<string | null> => {
   const files = await readdir(dir);
   for (const file of files) {
     const path = join(dir, file);
     const stats = await stat(path);
     if (stats.isDirectory()) {
-      const result = await findFileDeep(path, fileName, ext);
+      const result = await findFileDeep(path, fileName, filter);
       if (result) {
         return result;
       }
     } else if (stats.isFile()) {
       if (file === fileName) {
-        if (ext) {
-          if (path.endsWith(ext)) {
+        if (filter) {
+          if (filter(path)) {
             return path;
           }
         } else {
@@ -33,11 +33,11 @@ export const findFileDeep = async (
   return null;
 };
 
-// 指定したディレクトリ内のファイルを再帰的に検索して、`ext`で指定した拡張子のファイルのパスの配列を返します。
-// `ext`を指定しない場合は、全てのファイルを対象とします。
+// 指定したディレクトリ内のファイルを再帰的に検索して、`filter`で指定した条件に一致するファイルのパスの配列を返します。
+// `filter`を指定しない場合は、全てのファイルを対象とします。
 export const getFilesDeep = async (
   dir: string,
-  ext?: string
+  filter?: (path: string) => boolean
 ): Promise<string[]> => {
   const files = await readdir(dir);
   const result: string[] = [];
@@ -45,11 +45,11 @@ export const getFilesDeep = async (
     const path = join(dir, file);
     const stats = await stat(path);
     if (stats.isDirectory()) {
-      const files = await getFilesDeep(path, ext);
+      const files = await getFilesDeep(path, filter);
       result.push(...files);
     } else if (stats.isFile()) {
-      if (ext) {
-        if (path.endsWith(ext)) {
+      if (filter) {
+        if (filter(path)) {
           result.push(path);
         }
       } else {
