@@ -1,5 +1,6 @@
 {
   "name": "cms",
+  "type": "module",
   "scripts": {
     "build": "rimraf dist && tsx ./scripts/build.ts && cp -r public dist/public",
     "validate": "tsx ./scripts/validate.ts"

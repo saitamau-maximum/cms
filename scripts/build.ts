@@ -1,8 +1,13 @@
-import { join } from "path";
+import { dirname, join } from "path";
 import { buildCourse } from "./builder/course";
 import piko from "picocolors";
 import { mkdir } from "fs/promises";
 import { BuilderError } from "./builder/common";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = dirname(__filename);
 
 const distDir = join(__dirname, "..", "dist");
 const courseDir = join(__dirname, "..", "course");

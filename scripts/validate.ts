@@ -1,7 +1,12 @@
-import { join } from "path";
+import { dirname, join } from "path";
 import { validateCourse } from "./builder/course";
 import piko from "picocolors";
 import { BuilderError } from "./builder/common";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = dirname(__filename);
 
 const courseDir = join(__dirname, "..", "course");
 
