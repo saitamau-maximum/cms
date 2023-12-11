@@ -9,6 +9,7 @@ import {
 } from "../utils/find";
 import { join } from "path";
 import { mkdir, readFile, writeFile } from "fs/promises";
+import { markdownToHtml } from "scripts/utils/markdown";
 
 const courseFrontMatterSchema = z.object({
   id: z.string(),
@@ -81,7 +82,7 @@ const collectCourseList = async (courseDir: string): Promise<CourseData[]> => {
       const courseData: CourseData = {
         ...frontmatter,
         slug: getDirectoryName(courseTopMdPath),
-        content,
+        content: await markdownToHtml(content),
         sections: [],
       };
 
@@ -101,7 +102,7 @@ const collectCourseList = async (courseDir: string): Promise<CourseData[]> => {
           );
           courseData.sections.push({
             ...frontmatter,
-            content,
+            content: await markdownToHtml(content),
             slug,
           });
         });
