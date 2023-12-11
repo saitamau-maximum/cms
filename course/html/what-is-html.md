@@ -1,6 +1,6 @@
 ---
 title: HTMLとはなんぞや
-order: 2
+order: 1
 ---
 
 ## HTMLとは
