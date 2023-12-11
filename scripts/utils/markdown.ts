@@ -1,4 +1,5 @@
 import { unified } from "unified";
+import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remark2rehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
@@ -7,6 +8,7 @@ import rehypeStringify from "rehype-stringify";
 export const markdownToHtml = async (markdown: string) => {
   const result = await unified()
     .use(remarkParse) // markdown -> mdast の変換
+    .use(remarkGfm) // GFM に対応
     .use(remark2rehype) // mdast -> hast の変換
     .use(rehypeStringify) // hast -> html の変換
     .process(markdown);
