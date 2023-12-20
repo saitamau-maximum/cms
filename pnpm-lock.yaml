@@ -11,12 +11,18 @@ devDependencies:
   '@types/js-yaml':
     specifier: ^4.0.9
     version: 4.0.9
+  '@types/mdast':
+    specifier: ^4.0.3
+    version: 4.0.3
   '@types/node':
     specifier: ^20.10.4
     version: 20.10.4
   js-yaml:
     specifier: ^4.1.0
     version: 4.1.0
+  mdast:
+    specifier: ^3.0.0
+    version: 3.0.0
   picocolors:
     specifier: ^1.0.0
     version: 1.0.0
@@ -41,6 +47,9 @@ devDependencies:
   unified:
     specifier: ^11.0.4
     version: 11.0.4
+  unist-util-visit:
+    specifier: ^5.0.0
+    version: 5.0.0
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -770,6 +779,11 @@ packages:
     resolution: {integrity: sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==}
     dependencies:
       '@types/mdast': 4.0.3
+    dev: true
+
+  /mdast@3.0.0:
+    resolution: {integrity: sha512-xySmf8g4fPKMeC07jXGz971EkLbWAJ83s4US2Tj9lEdnZ142UP5grN73H1Xd3HzrdbU5o9GYYP/y8F9ZSwLE9g==}
+    deprecated: '`mdast` was renamed to `remark`'
     dev: true
 
   /micromark-core-commonmark@2.0.0:

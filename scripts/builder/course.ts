@@ -10,6 +10,7 @@ import {
 import { join } from "path";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import { markdownToHtml } from "scripts/utils/markdown";
+import { replaceSrc } from "scripts/utils/replace";
 
 const courseFrontMatterSchema = z.object({
   id: z.string(),
@@ -22,7 +23,9 @@ const courseFrontMatterSchema = z.object({
 });
 
 const validateAndParseCourseFrontMatter = (content: string, path: string) =>
-  validateAndParseMarkdown(content, path, courseFrontMatterSchema);
+  validateAndParseMarkdown(content, path, courseFrontMatterSchema, {
+    thumbnail: replaceSrc,
+  });
 
 type CourseItem = z.infer<typeof courseFrontMatterSchema> & {
   slug: string;

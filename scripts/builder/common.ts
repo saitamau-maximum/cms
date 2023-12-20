@@ -28,7 +28,8 @@ const Errors = {
 export const validateAndParseMarkdown = <T extends z.ZodObject<any>>(
   text: string,
   path: string,
-  frontMatterSchema: T
+  frontMatterSchema: T,
+  replacer: Partial<{ [K in keyof z.infer<T>]: (value: any) => any }> = {}
 ): {
   frontmatter: z.infer<T>;
   content: string;
@@ -54,6 +55,14 @@ export const validateAndParseMarkdown = <T extends z.ZodObject<any>>(
   if (!content) {
     throw Errors.Content.Blank(path);
   }
+
+  const replacerKeys = Object.keys(replacer) as (keyof T["_def"]["shape"])[];
+  replacerKeys.forEach((key) => {
+    const value = result.data[key];
+    if (value) {
+      result.data[key] = replacer[key](value);
+    }
+  });
 
   return {
     frontmatter: result.data,
